@@ -28,7 +28,6 @@ public:
     }
 
     std::cout << data << std::endl;
-    data.clear();
 
     close(socket);
     return nullptr;
