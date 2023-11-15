@@ -10,25 +10,27 @@ const int bufferSize = 2048;
 char buf[bufferSize];
 int bytesRead;
 std::string data;
-
+int count = 0;
 class UploadServer {
 public:
   void *readBuffer(int socket) {
     std::cout << "Read buffer called in Upload Server " << std::endl;
 
-    std::string delimiterPrefix = "------WebKitFormBoundary";
-
     while ((bytesRead = read(socket, buf, bufferSize)) > 0) {
 
-      if (bytesRead == 0) {
-        break;
-      }
-
       data += std::string(buf, bytesRead);
+
+      std::string bufferString(buf, bytesRead);
+
+      if (bufferString.find("--") != std::string::npos) {
+        count++;
+        if (count == 2) {
+          break;
+        }
+      }
     }
 
     std::cout << data << std::endl;
-
     close(socket);
     return nullptr;
   }
