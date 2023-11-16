@@ -7,7 +7,6 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <cstring>
-#include "FormUpload.cpp"
 #include "UploadServlet.cpp"
 
 #ifndef ASSIGNMENT2B_UPLOADSERVERTHREAD_HPP

@@ -8,18 +8,16 @@ void UploadServerThread::run(){
     char buffer[2048];
     read(clientSocket, buffer, sizeof(buffer) - 1);
     buffer[sizeof(buffer) - 1] = '\0';
-
-    FormUpload formUpload;
     UploadServlet uploadServlet;
 
     if (strstr(buffer, "GET") != NULL) {
         std::cout << "GET request received" << std::endl;
-        formUpload.sendTCP(clientSocket);
+        uploadServlet.doGet(clientSocket);
     }
 
     if (strstr(buffer, "POST") != NULL) {
         std::cout << "POST request received" << std::endl;
-        uploadServlet.readBuffer(clientSocket);
+        uploadServlet.doPost(clientSocket);
         std::cout << "File upload handled" << std::endl;
     }
 

@@ -65,6 +65,6 @@ public:
 
 int main(int argc, char *argv[]) {
     // Start the server on port 8082
-    UploadServer::startServer(8888);
+    UploadServer::startServer(8084);
     return 0;
 }
