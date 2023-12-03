@@ -11,7 +11,7 @@
 const int bufferSize = 2048;
 char buf[bufferSize];
 int bytesRead;
-std::string data;
+std::string Data;
 int count = 0;
 
 class UploadServlet {
@@ -139,7 +139,7 @@ public:
         std::string fileType = getFileExtension(filename);
 
         // Build new filename and save the file
-        std::string newFilename = caption + "_" + date + "_" + fileType;
+        std::string newFilename = caption + "_" + date + fileType;
         saveFile(fileContent, newFilename);
     }
 
@@ -156,7 +156,7 @@ public:
 
         while ((bytesRead = read(socket, buf, bufferSize)) > 0) {
 
-            data += std::string(buf, bytesRead);
+            Data += std::string(buf, bytesRead);
 
             std::string bufferString(buf, bytesRead);
 
@@ -168,9 +168,9 @@ public:
             }
         }
 
-        std::cout << data << std::endl;
+        std::cout << Data << std::endl;
 
-        parseMultipartFormData(data);
+        parseMultipartFormData(Data);
 
         close(socket);
         return nullptr;
